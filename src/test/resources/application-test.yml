@@ -1,0 +1,6 @@
+server:
+  port: 8080
+---
+spring:
+  application:
+    name: controle-de-ponto
