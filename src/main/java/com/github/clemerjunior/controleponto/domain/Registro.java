@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Document
 public class Registro {
 
@@ -22,13 +25,19 @@ public class Registro {
     @Getter
     List<LocalTime> horarios;
 
+
+    public Registro(LocalDate dia) {
+        this.dia = dia;
+        this.horarios = new ArrayList<>(4);
+    }
+
     @PersistenceCreator
     public Registro(LocalDate dia, List<LocalTime> horarios) {
         this.dia = dia;
-        this.horarios = horarios;
+        this.horarios = Objects.requireNonNullElse(horarios, new ArrayList<>(4));
     }
 
-    public void addHorario(LocalTime horario) throws Exception{
+    public void addHorario(LocalTime horario) {
        this.horarios.add(horario);
     }
 }
