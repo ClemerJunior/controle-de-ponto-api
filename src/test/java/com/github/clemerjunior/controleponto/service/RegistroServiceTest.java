@@ -89,7 +89,7 @@ public class RegistroServiceTest {
         assertThatThrownBy(() -> registroService.baterPonto(LocalDateTime.now()
                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))))
                 .isInstanceOf(HorarioNaoAutorizadoException.class)
-                .hasMessage(Constants.MAX_BATIDAS_DIA);
+                .hasMessage(Constants.MAX_HORARIOS_DIA);
 
         verify(registroRepository, times(1)).findRegistroByDia(any());
         verify(registroRepository, times(0)).save(any());
@@ -134,7 +134,7 @@ public class RegistroServiceTest {
                 .withHour(12)
                 .withMinute(40)))
                 .isInstanceOf(HorarioNaoAutorizadoException.class)
-                .hasMessage(Constants.HORARIO_ALMOCO_INVALIDO);
+                .hasMessage(Constants.DURACAO_ALMOCO_INVALIDA);
 
         verify(registroRepository, times(1)).existsByDiaAndHorariosContains(any(), any());
         verify(registroRepository, times(1)).findRegistroByDia(any());

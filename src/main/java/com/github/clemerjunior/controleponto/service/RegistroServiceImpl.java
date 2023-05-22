@@ -52,7 +52,7 @@ public class RegistroServiceImpl implements RegistroService{
 
     private void validarQuantidadeBatidasMax(Registro registro) {
         if(registro.getHorarios().size() >= HORARIOS_MAX_SIZE)
-            throw new HorarioNaoAutorizadoException(Constants.MAX_BATIDAS_DIA);
+            throw new HorarioNaoAutorizadoException(Constants.MAX_HORARIOS_DIA);
     }
 
     private void validarHorarioAlmoco(Registro registro, LocalTime horario) {
@@ -60,7 +60,7 @@ public class RegistroServiceImpl implements RegistroService{
             LocalTime saidaAlmoco = registro.getHorarios().stream().max(LocalTime::compareTo).orElseThrow();
 
             if(Duration.between(saidaAlmoco, horario).toHours() < 1)
-                throw new HorarioNaoAutorizadoException(Constants.HORARIO_ALMOCO_INVALIDO);
+                throw new HorarioNaoAutorizadoException(Constants.DURACAO_ALMOCO_INVALIDA);
 
         }
     }
