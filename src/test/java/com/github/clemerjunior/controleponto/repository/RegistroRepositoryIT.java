@@ -1,4 +1,4 @@
-package com.github.clemerjunior.controleponto.domain;
+package com.github.clemerjunior.controleponto.repository;
 
 import com.github.clemerjunior.controleponto.config.AbstractIntegrationTestConfig;
 import com.github.clemerjunior.controleponto.repositories.RegistroRepository;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RegistroTest extends AbstractIntegrationTestConfig {
+public class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
 
     @Autowired
     private RegistroRepository registroRepository;

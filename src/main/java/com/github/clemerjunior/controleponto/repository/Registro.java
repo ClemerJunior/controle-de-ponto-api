@@ -1,4 +1,4 @@
-package com.github.clemerjunior.controleponto.domain;
+package com.github.clemerjunior.controleponto.repository;
 
 import lombok.Getter;
 import lombok.Setter;
