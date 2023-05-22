@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RegistroIT extends AbstractIntegrationTestConfig {
+class RegistroIT extends AbstractIntegrationTestConfig {
 
     @Autowired
     private MockMvc mockMvc;
@@ -61,7 +61,7 @@ public class RegistroIT extends AbstractIntegrationTestConfig {
         var registro = registroRepository.findRegistroByDia(registroDTO.getDia()).orElse(null);
 
         assertThat(registro).isNotNull();
-        assertThat(registro.getHorarios().size()).isEqualTo(1);
+        assertThat(registro.getHorarios()).hasSize(1);
         assertThat(registro.getHorarios().get(0)).isEqualTo(momento.getDataHora().toLocalTime());
     }
 }

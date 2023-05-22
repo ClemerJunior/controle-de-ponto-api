@@ -16,7 +16,7 @@ import java.time.*;
 @RequiredArgsConstructor
 public class RegistroServiceImpl implements RegistroService{
 
-    private final static int HORARIOS_MAX_SIZE = 4;
+    private static final int HORARIOS_MAX_SIZE = 4;
 
     private final RegistroRepository repository;
 

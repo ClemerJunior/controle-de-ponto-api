@@ -10,16 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Objects;
-
 @RestControllerAdvice
 public class ExceptionHandle {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseError HandleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        var msg = Objects.nonNull(ex.getFieldError()) ? ex.getFieldError().getDefaultMessage() : Constants.DATA_HORA_NULL_VAZIA;
-        return returnResponseError(msg);
+    public ResponseError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return returnResponseError(Constants.DATA_HORA_NULL_VAZIA);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
