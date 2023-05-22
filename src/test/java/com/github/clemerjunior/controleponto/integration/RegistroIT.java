@@ -2,8 +2,8 @@ package com.github.clemerjunior.controleponto.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clemerjunior.controleponto.config.AbstractIntegrationTestConfig;
-import com.github.clemerjunior.controleponto.repository.Momento;
-import com.github.clemerjunior.controleponto.repository.RegistroDTO;
+import com.github.clemerjunior.controleponto.domain.Momento;
+import com.github.clemerjunior.controleponto.domain.RegistroDTO;
 import com.github.clemerjunior.controleponto.repositories.RegistroRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

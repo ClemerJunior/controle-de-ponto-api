@@ -1,7 +1,7 @@
 package com.github.clemerjunior.controleponto.service;
 
 
-import com.github.clemerjunior.controleponto.repository.Registro;
+import com.github.clemerjunior.controleponto.domain.Registro;
 import com.github.clemerjunior.controleponto.exceptions.HorarioNaoAutorizadoException;
 import com.github.clemerjunior.controleponto.exceptions.HorarioRegistradoException;
 import com.github.clemerjunior.controleponto.repositories.RegistroRepository;

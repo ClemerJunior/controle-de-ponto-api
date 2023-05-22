@@ -1,8 +1,8 @@
 package com.github.clemerjunior.controleponto.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.clemerjunior.controleponto.repository.Momento;
-import com.github.clemerjunior.controleponto.repository.RegistroDTO;
+import com.github.clemerjunior.controleponto.domain.Momento;
+import com.github.clemerjunior.controleponto.domain.RegistroDTO;
 import com.github.clemerjunior.controleponto.exceptions.HorarioNaoAutorizadoException;
 import com.github.clemerjunior.controleponto.exceptions.HorarioRegistradoException;
 import com.github.clemerjunior.controleponto.service.RegistroService;

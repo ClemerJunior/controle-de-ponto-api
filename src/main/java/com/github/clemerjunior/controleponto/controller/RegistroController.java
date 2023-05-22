@@ -1,7 +1,7 @@
 package com.github.clemerjunior.controleponto.controller;
 
-import com.github.clemerjunior.controleponto.repository.Momento;
-import com.github.clemerjunior.controleponto.repository.RegistroDTO;
+import com.github.clemerjunior.controleponto.domain.Momento;
+import com.github.clemerjunior.controleponto.domain.RegistroDTO;
 import com.github.clemerjunior.controleponto.service.RegistroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

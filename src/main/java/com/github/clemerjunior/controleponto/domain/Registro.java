@@ -1,5 +1,6 @@
-package com.github.clemerjunior.controleponto.repository;
+package com.github.clemerjunior.controleponto.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Document
+@EqualsAndHashCode
 public class Registro {
 
     @Id
@@ -23,6 +25,7 @@ public class Registro {
     LocalDate dia;
 
     @Getter
+    @EqualsAndHashCode.Exclude
     List<LocalTime> horarios;
 
 

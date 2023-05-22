@@ -1,6 +1,7 @@
 package com.github.clemerjunior.controleponto.repository;
 
 import com.github.clemerjunior.controleponto.config.AbstractIntegrationTestConfig;
+import com.github.clemerjunior.controleponto.domain.Registro;
 import com.github.clemerjunior.controleponto.repositories.RegistroRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
+class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
 
     @Autowired
     private RegistroRepository registroRepository;
@@ -56,8 +59,8 @@ public class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
         var registroSalvo = registroRepository.save(registroRecuperado);
 
         assertThat(registroSalvo).isNotNull();
-        assertThat(registroSalvo.getHorarios().size()).isEqualTo(2);
-        assertThat(registroSalvo.getHorarios().contains(novoHorario)).isTrue();
+        assertThat(registroSalvo.getHorarios()).hasSize(2);
+        assertThat(registroSalvo.getHorarios()).contains(novoHorario);
     }
 
     @Test
@@ -78,5 +81,30 @@ public class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
                 .existsByDiaAndHorariosContains(LocalDate.now(), LocalTime.of(13,0,0));
 
         assertThat(registroExiste).isFalse();
+    }
+
+    @Test
+    @DisplayName("Deve recuperar os registros do mes")
+    @Order(6)
+    void deveRecuperarOsRegistrosDoMes() {
+        var yearMonth = YearMonth.now();
+        var inicioProximoMes = yearMonth.atDay(1).plusMonths(1);
+        var fimMesAnterio = yearMonth.atEndOfMonth().minusMonths(1);
+
+        var registroInicioMes = new Registro(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()), new ArrayList<>());
+        registroRepository.save(registroInicioMes);
+
+        var registroFimMes = new Registro(LocalDate.now().with(TemporalAdjusters.lastDayOfMonth()), new ArrayList<>());
+        registroRepository.save(registroFimMes);
+
+        var registroOutroMes = new Registro(LocalDate.now().with(TemporalAdjusters.firstDayOfMonth()).plusMonths(1), new ArrayList<>());
+        registroRepository.save(registroOutroMes);
+
+
+        var todosRegistros = registroRepository.findAll();
+        var registrosDoMes = registroRepository.findByDiaBetweenOrderByDia(fimMesAnterio, inicioProximoMes);
+
+        assertThat(todosRegistros).isNotEmpty().hasSize(4).containsAll(registrosDoMes);
+        assertThat(registrosDoMes).isNotEmpty().hasSize(3).doesNotContain(registroOutroMes);
     }
 }
