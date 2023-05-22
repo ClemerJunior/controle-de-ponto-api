@@ -35,8 +35,6 @@ public class RegistroServiceTest {
     void setup() {
         registroService = new RegistroServiceImpl(registroRepository);
         registro = new Registro(LocalDate.now()
-                .withYear(Year.now().getValue())
-                .withMonth(Month.MAY.getValue())
                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY)));
         registro.addHorario(LocalTime.of(8,0, 0));
     }
@@ -64,10 +62,9 @@ public class RegistroServiceTest {
         when(registroRepository.findRegistroByDia(any())).thenReturn(Optional.of(registro));
         when(registroRepository.save(any())).thenReturn(registro);
 
-        var registroSalvo = registroService.baterPonto(LocalDateTime.now()
+        var registroSalvo = registroService.baterPonto(LocalDate.now()
                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))
-                .withHour(12)
-                .withMinute(0));
+                .atTime(12,0));
 
         assertThat(registroSalvo.getDia()).isEqualTo(registro.getDia());
         assertThat(registroSalvo.getHorarios().size()).isEqualTo(2);
@@ -129,10 +126,9 @@ public class RegistroServiceTest {
 
         when(registroRepository.findRegistroByDia(any())).thenReturn(Optional.of(registro));
 
-        assertThatThrownBy(() -> registroService.baterPonto(LocalDateTime.now()
+        assertThatThrownBy(() -> registroService.baterPonto(LocalDate.now()
                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))
-                .withHour(12)
-                .withMinute(40)))
+                .atTime(12,40)))
                 .isInstanceOf(HorarioNaoAutorizadoException.class)
                 .hasMessage(Constants.DURACAO_ALMOCO_INVALIDA);
 
