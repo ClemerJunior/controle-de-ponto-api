@@ -4,3 +4,9 @@ server:
 spring:
   application:
     name: controle-de-ponto
+  data:
+    mongodb:
+      port: 27017
+      database: controle-ponto
+      username: user
+      password: password
