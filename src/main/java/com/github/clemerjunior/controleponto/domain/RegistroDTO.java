@@ -17,4 +17,9 @@ public class RegistroDTO {
 
     private LocalDate dia;
     private List<LocalTime> horarios;
+
+    public RegistroDTO(Registro registro) {
+        this.dia = registro.getDia();
+        this.horarios = registro.getHorarios();
+    }
 }

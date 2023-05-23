@@ -3,10 +3,12 @@ package com.github.clemerjunior.controleponto.repository;
 import com.github.clemerjunior.controleponto.config.AbstractIntegrationTestConfig;
 import com.github.clemerjunior.controleponto.domain.Registro;
 import com.github.clemerjunior.controleponto.repositories.RegistroRepository;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
@@ -14,6 +16,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -102,7 +105,8 @@ class RegistroRepositoryIT extends AbstractIntegrationTestConfig {
 
 
         var todosRegistros = registroRepository.findAll();
-        var registrosDoMes = registroRepository.findByDiaBetweenOrderByDia(fimMesAnterio, inicioProximoMes);
+        var registrosDoMes = registroRepository.findByDiaBetweenOrderByDia(fimMesAnterio, inicioProximoMes)
+                .orElse(new ArrayList<>());
 
         assertThat(todosRegistros).isNotEmpty().hasSize(4).containsAll(registrosDoMes);
         assertThat(registrosDoMes).isNotEmpty().hasSize(3).doesNotContain(registroOutroMes);

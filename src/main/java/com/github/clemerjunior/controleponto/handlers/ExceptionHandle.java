@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 public class ExceptionHandle {
@@ -37,12 +38,17 @@ public class ExceptionHandle {
         return returnResponseError(ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseError handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        return returnResponseError(Constants.MES_INVALIDO);
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ResponseError handleException(Exception ex) {
         return returnResponseError(Constants.ERRO_INTERNO);
     }
-
     private ResponseError returnResponseError(String mensagem) {
         return new ResponseError(mensagem);
     }

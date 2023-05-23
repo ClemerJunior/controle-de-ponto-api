@@ -16,5 +16,5 @@ public interface RegistroRepository extends MongoRepository<Registro, LocalDate>
 
     boolean existsByDiaAndHorariosContains(LocalDate dia, LocalTime horario);
 
-    List<Registro> findByDiaBetweenOrderByDia(LocalDate inicioMes, LocalDate fimMes);
+    Optional<List<Registro>> findByDiaBetweenOrderByDia(LocalDate inicioMes, LocalDate fimMes);
 }

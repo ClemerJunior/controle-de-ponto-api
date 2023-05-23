@@ -9,4 +9,7 @@ public class Constants {
     public static final String DATA_HORA_NULL_VAZIA = "Campo obrigatório não informado";
     public static final String DATA_HORA_INVALIDO = "Data e hora em formato inválido";
     public static final String ERRO_INTERNO = "Ocorreu um erro interno em nosso servidor";
+
+    public static final String MES_INVALIDO = "Mês em formato inválido";
+    public static final String RELATORIO_NAO_ENCONTRADO = "Relatório não encontrado";
 }
