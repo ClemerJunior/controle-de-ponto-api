@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_.HOST=mongo
+    depends_on:
+      - "mongo"
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_controle_ponto
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: controle-ponto
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    expose:
+      - 27017
+    volumes:
+      - .scripts/init.js:/docker-entrypoint-initdb.d/init.js:ro
