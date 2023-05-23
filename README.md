@@ -15,7 +15,7 @@ Esse comando utiliza o arquivo docker-compose.yml presente no projeto para:
 
 2 - subir um container com a imagem do projeto, subir um container com imagem do MongoDB que o projeto utiliza como Banco de Dados.
 
-Caso queira, o projeto também pode ser executado com o comando `./mvnw spring-boot:run`,
+O projeto também pode ser executado com o comando `./mvnw spring-boot:run`,
 entretanto dessa forma será necessário uma instancia ou container do banco de dados em execução para a conexão.
 
 
